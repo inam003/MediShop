@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "Order Details";
+}
+
+<div class="container py-5">
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Order Details - #1024</h5>
+            <span class="badge bg-light text-dark">Delivered</span>
+        </div>
+
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h6 class="fw-bold">Order Information</h6>
+                    <p class="mb-1"><strong>Order Date:</strong> 15 Oct 2025</p>
+                    <p class="mb-1"><strong>Status:</strong> Delivered</p>
+                </div>
+                <div class="col-md-6">
+                    <h6 class="fw-bold">Delivery Information</h6>
+                    <p class="mb-1"><strong>Name:</strong> Muhammad Inam</p>
+                    <p class="mb-1"><strong>Email:</strong> inam@example.com</p>
+                    <p class="mb-1"><strong>Address:</strong> 123 Main Street, Lahore</p>
+                </div>
+            </div>
+
+            <h6 class="fw-bold mb-3">Ordered Medicines</h6>
+            <table class="table table-bordered align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>Medicine</th>
+                        <th>Category</th>
+                        <th>Quantity</th>
+                        <th>Price (Rs.)</th>
+                        <th>Total (Rs.)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Paracetamol 500mg</td>
+                        <td>Fever</td>
+                        <td>2</td>
+                        <td>50.00</td>
+                        <td>100.00</td>
+                    </tr>
+                    <tr>
+                        <td>Amoxicillin 250mg</td>
+                        <td>Antibiotic</td>
+                        <td>1</td>
+                        <td>120.00</td>
+                        <td>120.00</td>
+                    </tr>
+                    <tr>
+                        <td>Vitamin C Tablets</td>
+                        <td>Supplements</td>
+                        <td>3</td>
+                        <td>30.00</td>
+                        <td>90.00</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="d-flex justify-content-end mt-4">
+                <h5><strong>Grand Total: Rs. 310.00</strong></h5>
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+                <a href="/Customer/Orders" class="btn btn-outline-secondary">
+                    <i class="bi bi-arrow-left"></i> Back to Orders
+                </a>
+                <button class="btn btn-danger">
+                    Cancel Order
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

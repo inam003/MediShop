@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Medicines";
+}
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">Available Medicines</h2>
+
+        <!-- Category Filter -->
+        <form method="get" asp-action="Index" class="d-flex">
+            <select class="form-select me-2" name="category" style="width: 220px;">
+                <option value="">All Categories</option>
+                <option value="Pain Relief">Pain Relief</option>
+                <option value="Antibiotics">Antibiotics</option>
+                <option value="Vitamins">Vitamins</option>
+                <option value="Cough & Cold">Cough & Cold</option>
+                <option value="First Aid">First Aid</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
+    </div>
+
+    <!-- Medicines Grid -->
+    <div class="row g-4">
+
+        @{
+            var allMedicines = new[]
+            {
+                new { Name = "Paracetamol 500mg", Price = 3.99, Image = "/images/Paracetamol 500mg.png" },
+                new { Name = "Amoxicillin 250mg", Price = 7.49, Image = "/images/Amoxicillin 250mg.webp" },
+                new { Name = "Vitamin C Tablets", Price = 4.25, Image = "/images/Vitamin C Tablets.jpg" },
+                new { Name = "Cough Syrup", Price = 5.89, Image = "/images/Cough Syrup.jpg" },
+                new { Name = "Ibuprofen 200mg", Price = 6.75, Image = "/images/Ibuprofen 200mg.jpeg" },
+                new { Name = "Antacid Tablets", Price = 2.99, Image = "/images/Antacid Tablets.webp" },
+                new { Name = "Allergy Relief", Price = 8.50, Image = "/images/Allergy Relief.webp" },
+                new { Name = "Multivitamin Capsules", Price = 10.00, Image = "/images/Multivitamin Capsules.avif" }
+                };
+        }
+
+        @foreach (var med in allMedicines)
+        {
+            <div class="col-md-3 col-sm-6">
+                <div class="card h-100 shadow-sm border-0 product-card">
+                    <img src="@med.Image" class="card-img-top" alt="@med.Name" style="height: 180px; object-fit: cover;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">@med.Name</h5>
+                        <p class="text-muted mb-2">$@med.Price</p>
+                        <a href="#" class="btn btn-outline-primary w-100">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

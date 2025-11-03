@@ -1,3 +1,72 @@
-﻿<div class="text-center">
-    <h1 class="display-4">Welcome to MediShop</h1>
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<!-- 🔹 Hero Section -->
+<div class="bg-light rounded-3 p-5 mb-5 shadow-sm">
+    <div class="row align-items-center">
+        <div class="col-md-7">
+            <h1 class="fw-bold text-primary mb-3">Welcome to Online Medicine Shop</h1>
+            <p class="lead text-muted">
+                Buy medicines and healthcare products from the comfort of your home.
+                Fast delivery, genuine products, and affordable prices — all in one place!
+            </p>
+            <a asp-area="Customer" asp-controller="Medicines" asp-action="Index"
+               class="btn btn-primary btn-lg mt-2">Shop Now</a>
+        </div>
+        <div class="col-md-5 text-center">
+            <img src="~/images/Vitamin C Tablets.jpg" alt="Medicine Image" class="img-fluid" style="max-height: 250px;">
+        </div>
+    </div>
 </div>
+
+<!-- 🔹 Search Bar -->
+<div class="mb-5">
+    <form method="get" asp-area="Customer" asp-controller="Medicines" asp-action="Index">
+        <div class="input-group input-group-lg shadow-sm">
+            <input type="text" name="search" class="form-control" placeholder="Search medicines by name or category..." />
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+</div>
+
+<!-- 🔹 Featured Medicines Section -->
+<h2 class="fw-semibold mb-4 text-primary">Featured Medicines</h2>
+
+<div class="row g-4">
+    @* Example mock data (replace with your dynamic model later) *@
+    @{
+        var featuredMedicines = new[]
+        {
+        new { Name = "Paracetamol 500mg", Price = 3.99, Image = "/images/Paracetamol 500mg.png" },
+        new { Name = "Amoxicillin 250mg", Price = 7.49, Image = "/images/Amoxicillin 250mg.webp" },
+        new { Name = "Vitamin C Tablets", Price = 4.25, Image = "/images/Vitamin C Tablets.jpg" },
+        new { Name = "Cough Syrup", Price = 5.89, Image = "/images/Cough Syrup.jpg" },
+        new { Name = "Ibuprofen 200mg", Price = 6.75, Image = "/images/Ibuprofen 200mg.jpeg" },
+        new { Name = "Antacid Tablets", Price = 2.99, Image = "/images/Antacid Tablets.webp" },
+        new { Name = "Allergy Relief", Price = 8.50, Image = "/images/Allergy Relief.webp" },
+        new { Name = "Multivitamin Capsules", Price = 10.00, Image = "/images/Multivitamin Capsules.avif" }
+        };
+    }
+
+    @foreach (var med in featuredMedicines)
+    {
+        <div class="col-md-3 col-sm-6">
+            <div class="card h-100 shadow-sm border-0 product-card">
+                <img src="@med.Image" class="card-img-top" alt="@med.Name" style="height: 180px; object-fit: cover;">
+                <div class="card-body text-center">
+                    <h5 class="card-title">@med.Name</h5>
+                    <p class="text-muted mb-2">$@med.Price</p>
+                    <a asp-area="Customer" asp-controller="Medicines" asp-action="Details"
+                       class="btn btn-outline-primary btn-sm">View Details</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+@section Scripts {
+    <!-- Optionally add icons library -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+}
