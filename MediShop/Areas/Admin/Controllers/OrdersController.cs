@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace MediShop.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class UserController : Controller
+    [Authorize(Roles = "Admin")]
+    public class OrdersController : Controller
     {
         public IActionResult Index()
         {

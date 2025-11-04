@@ -1,0 +1,78 @@
+﻿@* Views/Admin/Medicines.cshtml *@
+@model IEnumerable<MediShop.Model.Medicine>
+@{
+    ViewData["Title"] = "Manage Medicines";
+    Layout = "_Layout";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="fas fa-pills"></i> Manage Medicines</h2>
+    <a asp-area="Admin" asp-controller="Medicines" asp-action="Upsert" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Add New Medicine
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @* @foreach (var medicine in Model)
+                {
+                    <tr>
+                        <td>@medicine.MedicineId</td>
+                        <td><strong>@medicine.Name</strong></td>
+                        <td><span class="badge bg-info">@medicine.Category</span></td>
+                        <td>₨ @medicine.Price.ToString("N2")</td>
+                        <td>
+                            <span class="badge @(medicine.QuantityInStock < 10 ? "bg-danger" : "bg-success")">
+                                @medicine.QuantityInStock units
+                            </span>
+                        </td>
+                        <td>
+                            <a href="/Admin/EditMedicine/@medicine.MedicineId" class="btn btn-sm btn-warning">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <form method="post" asp-action="DeleteMedicine" asp-route-id="@medicine.MedicineId" class="d-inline">
+                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this medicine?')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                } *@
+
+                <tr>
+                    <td>001</td>
+                    <td><strong>Panadol</strong></td>
+                    <td><span class="badge bg-info">Cough</span></td>
+                    <td>₨ 100</td>
+                    <td>
+                        <span class="badge bg-success">
+                            8 units
+                        </span>
+                    </td>
+                    <td>
+                        <a href="/Admin/EditMedicine/1" class="btn btn-sm btn-warning">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <form method="post" asp-action="DeleteMedicine" asp-route-id="001" class="d-inline">
+                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this medicine?')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

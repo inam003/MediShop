@@ -1,0 +1,72 @@
+﻿@* Views/Admin/Orders.cshtml *@
+@model IEnumerable<MediShop.Model.Order>
+@{
+    ViewData["Title"] = "Manage Orders";
+    Layout = "_Layout";
+}
+
+<h2 class="mb-4"><i class="fas fa-shopping-bag"></i> Manage Orders</h2>
+
+<div class="card">
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Date</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @* @foreach (var order in Model)
+                {
+                    <tr>
+                        <td><strong>#@order.OrderId</strong></td>
+                        <td>Customer @order.CustomerId</td>
+                        <td>@order.OrderDate.ToString("MMM dd, yyyy")</td>
+                        <td>₨ @order.TotalAmount.ToString("N2")</td>
+                        <td>
+                            <span class="badge @(order.Status == "Pending" ? "bg-warning" : order.Status == "Completed" ? "bg-info" : "bg-success")">
+                                @order.Status
+                            </span>
+                        </td>
+                        <td>
+                            @if (order.Status == "Pending")
+                            {
+                                <form method="post" asp-action="UpdateOrderStatus" asp-route-id="@order.OrderId" asp-route-status="Completed" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-info">Mark Completed</button>
+                                </form>
+                            }
+                            @if (order.Status == "Completed")
+                            {
+                                <form method="post" asp-action="UpdateOrderStatus" asp-route-id="@order.OrderId" asp-route-status="Delivered" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-success">Mark Delivered</button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                } *@
+
+                <tr>
+                    <td><strong>#001</strong></td>
+                    <td>Customer 01</td>
+                    <td>04-11-2025</td>
+                    <td>₨ 100</td>
+                    <td>
+                        <span class="badge bg-info">
+                            Completed
+                        </span>
+                    </td>
+                    <td>
+                            <form method="post" asp-action="UpdateOrderStatus" asp-route-id="001" asp-route-status="Completed" class="d-inline">
+                                <button type="submit" class="btn btn-sm btn-info">Mark Completed</button>
+                            </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

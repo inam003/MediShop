@@ -1,11 +1,10 @@
 ﻿@{
     ViewData["Title"] = "My Orders";
 }
-
+@* 
 <div class="container mt-5">
     <h2 class="fw-bold mb-4 text-primary">My Orders</h2>
 
-    <!-- Orders Table -->
     <div class="card shadow-sm border-0">
         <div class="card-body">
             <div class="table-responsive">
@@ -20,7 +19,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Sample Row 1 -->
                         <tr>
                             <td>ORD-1001</td>
                             <td>2025-10-25</td>
@@ -32,61 +30,21 @@
                                 <a asp-area="Customer" asp-controller="Orders" asp-action="Details" class="btn btn-sm btn-outline-primary">
                                     <i class="bi bi-eye"></i> View
                                 </a>
-                                @* <a asp-action="Details" asp-route-id="1" class="btn btn-outline-primary btn-sm">
-                                    <i class="bi bi-eye"></i> View
-                                </a> *@
                             </td>
                         </tr>
-
-                        <!-- Sample Row 2 -->
-                        <tr>
-                            <td>ORD-1000</td>
-                            <td>2025-10-22</td>
-                            <td>$60.00</td>
-                            <td>
-                                <span class="badge bg-success">Delivered</span>
-                            </td>
-                            <td class="text-center">
-                                <a asp-area="Customer" asp-controller="Orders" asp-action="Details" class="btn btn-sm btn-outline-primary">
-                                    <i class="bi bi-eye"></i> View
-                                </a>
-                                @* <a asp-action="Details" asp-route-id="2" class="btn btn-outline-primary btn-sm">
-                                    <i class="bi bi-eye"></i> View
-                                </a> *@
-                            </td>
-                        </tr>
-
-                        <!-- Sample Row 3 -->
-                        <tr>
-                            <td>ORD-0999</td>
-                            <td>2025-10-18</td>
-                            <td>$22.75</td>
-                            <td>
-                                <span class="badge bg-info text-dark">Completed</span>
-                            </td>
-                            <td class="text-center">
-                                <a asp-area="Customer" asp-controller="Orders" asp-action="Details" class="btn btn-sm btn-outline-primary">
-                                    <i class="bi bi-eye"></i> View
-                                </a>
-                                @* <a asp-action="Details" asp-route-id="3" class="btn btn-outline-primary btn-sm">
-                                    <i class="bi bi-eye"></i> Details
-                                </a> *@
-                            </td>
-                        </tr>
+                        
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+</div> *@
 
-    <!-- No Orders Message (Optional Placeholder) -->
-    @* 
-    <div class="text-center mt-5">
-        <img src="~/images/empty_orders.svg" alt="No Orders" width="200" class="mb-3" />
-        <h5 class="text-muted">You have not placed any orders yet.</h5>
-        <a asp-area="Customer" asp-controller="Medicines" asp-action="Index" class="btn btn-primary mt-3">
-            <i class="bi bi-cart-plus"></i> Shop Now
-        </a>
-    </div>
-    *@
+<div class="text-center py-5">
+    <i class="fas fa-shopping-bag fa-5x text-muted mb-3"></i>
+    <h3>No orders yet</h3>
+    <p class="text-muted">Start shopping to place your first order.</p>
+    <a href="/" class="btn btn-primary">
+        <i class="fas fa-pills"></i> Browse Medicines
+    </a>
 </div>
