@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace MediShop.Areas.Customer.Controllers
 {
     [Area("Customer")]
-    //[Authorize(Roles = "Customer")]
     public class HomeController : Controller
     {
         public IActionResult Index()

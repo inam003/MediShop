@@ -2,6 +2,20 @@ html {
   font-size: 14px;
 }
 
+body {
+    background: linear-gradient(135deg, #f0f4ff, #e8efff);
+}
+
+.card {
+    backdrop-filter: blur(6px);
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+}
+
+
 .category-card:hover {
     background-color: #f8f9fa;
     transform: translateY(-4px);
