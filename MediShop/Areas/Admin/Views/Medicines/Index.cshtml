@@ -26,7 +26,7 @@
                 </tr>
             </thead>
             <tbody>
-                @* @foreach (var medicine in Model)
+                @foreach (var medicine in Model)
                 {
                     <tr>
                         <td>@medicine.MedicineId</td>
@@ -34,44 +34,20 @@
                         <td><span class="badge bg-info">@medicine.Category</span></td>
                         <td>₨ @medicine.Price.ToString("N2")</td>
                         <td>
-                            <span class="badge @(medicine.QuantityInStock < 10 ? "bg-danger" : "bg-success")">
-                                @medicine.QuantityInStock units
+                            <span class="badge @(medicine.StockQuantity < 10 ? "bg-danger" : "bg-success")">
+                                @medicine.StockQuantity units
                             </span>
                         </td>
                         <td>
-                            <a href="/Admin/EditMedicine/@medicine.MedicineId" class="btn btn-sm btn-warning">
+                            <a asp-area="Admin" asp-controller="Medicines" asp-action="Upsert" asp-route-id="@medicine.MedicineId" class="btn btn-sm btn-warning">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <form method="post" asp-action="DeleteMedicine" asp-route-id="@medicine.MedicineId" class="d-inline">
-                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this medicine?')">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </form>
+                            <a asp-area="Admin" asp-controller="Medicines" asp-action="Delete" asp-route-id="@medicine.MedicineId" class="btn btn-sm btn-danger">
+                                <i class="fas fa-trash"></i>
+                            </a>
                         </td>
                     </tr>
-                } *@
-
-                <tr>
-                    <td>001</td>
-                    <td><strong>Panadol</strong></td>
-                    <td><span class="badge bg-info">Cough</span></td>
-                    <td>₨ 100</td>
-                    <td>
-                        <span class="badge bg-success">
-                            8 units
-                        </span>
-                    </td>
-                    <td>
-                        <a href="/Admin/EditMedicine/1" class="btn btn-sm btn-warning">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        <form method="post" asp-action="DeleteMedicine" asp-route-id="001" class="d-inline">
-                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this medicine?')">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </form>
-                    </td>
-                </tr>
+                } 
             </tbody>
         </table>
     </div>

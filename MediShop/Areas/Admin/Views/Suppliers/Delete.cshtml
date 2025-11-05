@@ -1,44 +1,40 @@
 ﻿@* Views/Admin/CreateSupplier.cshtml *@
 @model MediShop.Model.Supplier
 @{
-    ViewData["Title"] = "Add Supplier";
+    ViewData["Title"] = "Delete Supplier";
     Layout = "_Layout";
 }
 
-<h2 class="mb-4"><i class="fas fa-plus-circle"></i> @(Model.SupplierId == 0 ? "Add New Supplier" : "Edit Supplier")</h2>
+<h2 class="mb-4"><i class="fas fa-plus-circle"></i> Delete Supplier</h2>
 
 <div class="row">
     <div class="col-md-8">
         <div class="card">
             <div class="card-body">
-                <form method="post" asp-action="Upsert" enctype="multipart/form-data">
-                    <input asp-for="SupplierId" hidden/>
+                <form method="post" asp-action="Delete" enctype="multipart/form-data">
+                    <input asp-for="SupplierId" hidden />
                     <div class="mb-3">
                         <label asp-for="Name" class="form-label">Supplier Name</label>
-                        <input asp-for="Name" class="form-control" required />
-                        <span asp-validation-for="Name" class="text-danger"></span>
+                        <input asp-for="Name" class="form-control" disabled required />
                     </div>
                     <div class="mb-3">
                         <label asp-for="Email" class="form-label">Email</label>
-                        <input asp-for="Email" class="form-control" required />
-                        <span asp-validation-for="Email" class="text-danger"></span>
+                        <input asp-for="Email" class="form-control" disabled required />
                     </div>
                     <div class="mb-3">
                         <label asp-for="ContactNumber" class="form-label">Contact Number</label>
-                        <input asp-for="ContactNumber" class="form-control" rows="3" required />
-                        <span asp-validation-for="ContactNumber" class="text-danger"></span>
+                        <input asp-for="ContactNumber" class="form-control" rows="3" disabled required />
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label asp-for="Address" class="form-label">Address</label>
-                            <textarea asp-for="Address" type="text" class="form-control" required></textarea>
-                            <span asp-validation-for="Address" class="text-danger"></span>
+                            <textarea asp-for="Address" type="text" class="form-control" disabled required></textarea>
                         </div>
                     </div>
 
                     <div class="d-flex gap-2">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save"></i> Save Supplier
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-trash"></i> Delete Supplier
                         </button>
                         <a asp-area="Admin" asp-controller="Suppliers" asp-action="Index" class="btn btn-secondary">
                             <i class="fas fa-times"></i> Cancel
