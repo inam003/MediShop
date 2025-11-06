@@ -21,11 +21,11 @@
                 </tr>
             </thead>
             <tbody>
-                @* @foreach (var order in Model)
+                @foreach (var order in Model)
                 {
                     <tr>
                         <td><strong>#@order.OrderId</strong></td>
-                        <td>Customer @order.CustomerId</td>
+                        @* <td>Customer @order.CustomerId</td> *@
                         <td>@order.OrderDate.ToString("MMM dd, yyyy")</td>
                         <td>₨ @order.TotalAmount.ToString("N2")</td>
                         <td>
@@ -48,24 +48,7 @@
                             }
                         </td>
                     </tr>
-                } *@
-
-                <tr>
-                    <td><strong>#001</strong></td>
-                    <td>Customer 01</td>
-                    <td>04-11-2025</td>
-                    <td>₨ 100</td>
-                    <td>
-                        <span class="badge bg-info">
-                            Completed
-                        </span>
-                    </td>
-                    <td>
-                            <form method="post" asp-action="UpdateOrderStatus" asp-route-id="001" asp-route-status="Completed" class="d-inline">
-                                <button type="submit" class="btn btn-sm btn-info">Mark Completed</button>
-                            </form>
-                    </td>
-                </tr>
+                }
             </tbody>
         </table>
     </div>

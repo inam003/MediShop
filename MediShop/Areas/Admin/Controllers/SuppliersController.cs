@@ -41,6 +41,7 @@ namespace MediShop.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Upsert(Supplier supplier)
         {
             if (ModelState.IsValid)
@@ -78,6 +79,7 @@ namespace MediShop.Areas.Admin.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int? id)
         {
             Supplier? supplier = _context.Suppliers.FirstOrDefault(m => m.SupplierId == id);

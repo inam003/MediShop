@@ -12,6 +12,7 @@
         <div class="card">
             <div class="card-body">
                 <form method="post" asp-action="Upsert" enctype="multipart/form-data">
+                    @Html.AntiForgeryToken()
                     <input hidden asp-for="MedicineId" />
                     <div class="mb-3">
                         <label asp-for="Name" class="form-label">Medicine Name</label>

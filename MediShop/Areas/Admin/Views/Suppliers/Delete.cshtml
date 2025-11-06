@@ -12,6 +12,7 @@
         <div class="card">
             <div class="card-body">
                 <form method="post" asp-action="Delete" enctype="multipart/form-data">
+                    @Html.AntiForgeryToken()
                     <input asp-for="SupplierId" hidden />
                     <div class="mb-3">
                         <label asp-for="Name" class="form-label">Supplier Name</label>

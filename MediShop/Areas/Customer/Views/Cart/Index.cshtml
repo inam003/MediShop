@@ -1,8 +1,76 @@
-﻿<div class="text-center py-5">
-    <i class="fas fa-shopping-cart fa-5x text-muted mb-3"></i>
-    <h3>Your cart is empty</h3>
-    <p class="text-muted">Add some medicines to your cart to get started.</p>
-    <a href="/" class="btn btn-primary">
-        <i class="fas fa-pills"></i> Browse Medicines
-    </a>
+﻿@model IEnumerable<MediShop.Model.Cart>
+
+<div class="container">
+    <h2 class="mb-4"><i class="fas fa-shopping-cart"></i> Your Cart</h2>
+
+    @if (!Model.Any())
+    {
+        <div class="text-center py-5">
+            <i class="fas fa-shopping-cart fa-5x text-muted mb-3"></i>
+            <h3>Your cart is empty</h3>
+            <p class="text-muted">Add some medicines to your cart to get started.</p>
+            <a href="/" class="btn btn-primary">
+                <i class="fas fa-pills"></i> Browse Medicines
+            </a>
+        </div>
+    }
+    else
+    {
+        <table class="table table-bordered align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Image</th>
+                    <th>Medicine</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><img src="~/images/Vitamin C Tablets.jpg" width="60" height="60" /></td>
+                        <td>@item.Medicine?.Name</td>
+                        <td>@item.Medicine?.Category</td>
+                        <td>Rs. @item.Medicine?.Price</td>
+                        <td>@item.Quantity</td>
+                        <td><strong>Rs. @item.Total</strong></td>
+                        <td>
+                            <div class="d-flex gap-2">
+                                <form asp-action="IncreaseQuantity" method="post">
+                                    <input type="hidden" name="cartId" value="@item.CartId" />
+                                    <button class="btn btn-sm btn-success"><i class="fas fa-plus"></i></button>
+                                </form>
+
+                                <form asp-action="DecreaseQuantity" method="post">
+                                    <input type="hidden" name="cartId" value="@item.CartId" />
+                                    <button class="btn btn-sm btn-warning"><i class="fas fa-minus"></i></button>
+                                </form>
+
+                                <form asp-action="Remove" method="post">
+                                    <input type="hidden" name="cartId" value="@item.CartId" />
+                                    <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="text-end mt-3">
+            <h4>
+                Total:
+                <strong>
+                    Rs. @Model.Sum(c => c.Total)
+                </strong>
+            </h4>
+            <a asp-action="Checkout" class="btn btn-primary btn-lg mt-3">
+                <i class="fas fa-credit-card"></i> Proceed to Checkout
+            </a>
+        </div>
+     }
 </div>

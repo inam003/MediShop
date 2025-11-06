@@ -1,4 +1,4 @@
-﻿@* Views/Admin/Index.cshtml *@
+﻿
 @{
     ViewData["Title"] = "Admin Dashboard";
     Layout = "_Layout";
@@ -11,7 +11,7 @@
         <div class="card text-white bg-primary">
             <div class="card-body">
                 <h5 class="card-title"><i class="fas fa-pills"></i> Medicines</h5>
-                <h2 class="mb-0">3</h2>
+                <h2 class="mb-0">@ViewBag.TotalMedicines</h2>
             </div>
             <div class="card-footer">
                 <a asp-area="Admin" asp-controller="Medicines" asp-action="Index" class="text-white text-decoration-none">View Details →</a>
@@ -44,7 +44,7 @@
         <div class="card text-white bg-info">
             <div class="card-body">
                 <h5 class="card-title"><i class="fas fa-truck"></i> Suppliers</h5>
-                <h2 class="mb-0">1</h2>
+                <h2 class="mb-0">@ViewBag.TotalSuppliers</h2>
             </div>
             <div class="card-footer">
                 <a asp-area="Admin" asp-controller="Suppliers" asp-action="Index" class="text-white text-decoration-none">View Details →</a>

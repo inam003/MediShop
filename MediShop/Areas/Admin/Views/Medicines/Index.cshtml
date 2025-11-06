@@ -20,6 +20,7 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Category</th>
+                    <th>Supplier</th>
                     <th>Price</th>
                     <th>Stock</th>
                     <th>Actions</th>
@@ -32,6 +33,7 @@
                         <td>@medicine.MedicineId</td>
                         <td><strong>@medicine.Name</strong></td>
                         <td><span class="badge bg-info">@medicine.Category</span></td>
+                        <td>@medicine.Supplier?.Name</td>
                         <td>₨ @medicine.Price.ToString("N2")</td>
                         <td>
                             <span class="badge @(medicine.StockQuantity < 10 ? "bg-danger" : "bg-success")">

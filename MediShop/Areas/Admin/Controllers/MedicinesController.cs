@@ -25,26 +25,31 @@ namespace MediShop.Areas.Admin.Controllers
 
         public IActionResult Upsert(int? id)
         {
-            ViewBag.Suppliers = new SelectList(_context.Suppliers, "SupplierId", "Name");
-
             Medicine? medicine = new Medicine();
 
             if (id == null || id == 0)
             {
-                return View(medicine);
+                ViewBag.Suppliers = new SelectList(_context.Suppliers, "SupplierId", "Name");
+                //return View(medicine);
             }
             else
             {
-                medicine = _context.Medicines.FirstOrDefault(m => m.MedicineId == id);
+                medicine = _context.Medicines.Include(m => m.Supplier).FirstOrDefault(m => m.MedicineId == id);
+
                 if (medicine == null)
                 {
                     return NotFound();
                 }
+
+                ViewBag.Suppliers = new SelectList(_context.Suppliers, "SupplierId", "Name", medicine.SupplierId);
                 return View(medicine);
             }
+
+            return View(medicine);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Upsert(Medicine medicine)
         {
             if (ModelState.IsValid)
@@ -73,17 +78,19 @@ namespace MediShop.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            Medicine? medicine = _context.Medicines.FirstOrDefault(m => m.MedicineId == id);
+            Medicine? medicine = _context.Medicines.Include(m => m.Supplier).FirstOrDefault(m => m.MedicineId == id);
 
             if (medicine == null)
             {
                 return NotFound();
             }
 
+            ViewBag.Suppliers = new SelectList(_context.Suppliers, "SupplierId", "Name", medicine.SupplierId);
             return View(medicine);
         }
 
         [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int? id)
         {
             Medicine? medicine = _context.Medicines.FirstOrDefault(m => m.MedicineId == id);

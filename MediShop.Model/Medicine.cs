@@ -25,4 +25,5 @@ public class Medicine
     [ForeignKey("SupplierId")]
     [ValidateNever]
     public Supplier? Supplier { get; set; }
+    public ICollection<OrderDetail> OrderDetails { get; set; }
 }
