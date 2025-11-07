@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<MediShop.Model.Medicine>
+@using MediShop.Model
 @using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
+@inject SignInManager<ApplicationUser> SignInManager
 
 @{
     ViewData["Title"] = "Home";

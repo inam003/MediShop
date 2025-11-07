@@ -22,7 +22,7 @@
         <div class="card text-white bg-success">
             <div class="card-body">
                 <h5 class="card-title"><i class="fas fa-shopping-bag"></i> Orders</h5>
-                <h2 class="mb-0">1</h2>
+                <h2 class="mb-0">@ViewBag.TotalOrders</h2>
             </div>
             <div class="card-footer">
                 <a asp-area="Admin" asp-controller="Orders" asp-action="Index" class="text-white text-decoration-none">View Details →</a>
@@ -33,7 +33,7 @@
         <div class="card text-white bg-warning">
             <div class="card-body">
                 <h5 class="card-title"><i class="fas fa-users"></i> Customers</h5>
-                <h2 class="mb-0">2</h2>
+                <h2 class="mb-0">@ViewBag.TotalCustomers</h2>
             </div>
             <div class="card-footer">
                 <a asp-area="Admin" asp-controller="Customers" asp-action="Index" class="text-white text-decoration-none">View Details →</a>

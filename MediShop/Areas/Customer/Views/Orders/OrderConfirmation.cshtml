@@ -1,0 +1,54 @@
+﻿@model MediShop.Model.Order
+@{
+    ViewData["Title"] = "Order Confirmation";
+}
+
+<div class="container py-5 text-center">
+    <div class="card shadow-lg border-0 p-4 mx-auto" style="max-width: 700px;">
+        <div class="card-body">
+            <i class="fas fa-check-circle text-success fa-4x mb-3"></i>
+            <h2 class="fw-bold">Thank You for Your Purchase!</h2>
+            <p class="text-muted mb-4">Your order has been placed successfully.</p>
+
+            <div class="bg-light p-3 rounded mb-4">
+                <h5 class="fw-bold mb-2">Order Summary</h5>
+                <p><strong>Order ID:</strong> #@Model.OrderId</p>
+                <p><strong>Order Date:</strong> @Model.OrderDate.ToString("dd MMM yyyy, hh:mm tt")</p>
+                <p><strong>Status:</strong> <span class="badge bg-warning">@Model.Status</span></p>
+                <p><strong>Total Amount:</strong> Rs. @Model.TotalAmount.ToString("N0")</p>
+            </div>
+
+            <h5 class="fw-bold mb-3">Items Ordered</h5>
+            <div class="table-responsive mb-4">
+                <table class="table align-middle table-striped">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Medicine</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.OrderDetails)
+                        {
+                            <tr>
+                                <td>@item.Medicine.Name</td>
+                                <td>@item.Quantity</td>
+                                <td>Rs. @item.Price</td>
+                                <td>Rs. @(item.Quantity* item.Price)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <a asp-area="Customer" asp-controller="Home" asp-action="Index" class="btn btn-primary px-4">
+                <i class="fas fa-store me-2"></i> Continue Shopping
+            </a>
+            <a asp-area="Customer" asp-controller="Orders" asp-action="Index" class="btn btn-outline-secondary px-4 ms-2">
+                <i class="fas fa-receipt me-2"></i> View My Orders
+            </a>
+        </div>
+    </div>
+</div>

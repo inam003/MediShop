@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MediShop.Model;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MediShop.Areas.Admin.Controllers
@@ -7,9 +9,17 @@ namespace MediShop.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class CustomersController : Controller
     {
-        public IActionResult Index()
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public CustomersController(UserManager<ApplicationUser> userManager)
         {
-            return View();
+            _userManager = userManager;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var customers = await _userManager.GetUsersInRoleAsync("Customer");
+            return View(customers);
         }
     }
 }

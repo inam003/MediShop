@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<MediShop.Model.Cart>
 
 <div class="container">
-    <h2 class="mb-4"><i class="fas fa-shopping-cart"></i> Your Cart</h2>
+    <h2 class="mb-4 text-primary"><i class="fas fa-shopping-cart"></i> Your Cart</h2>
 
     @if (!Model.Any())
     {
@@ -68,7 +68,7 @@
                     Rs. @Model.Sum(c => c.Total)
                 </strong>
             </h4>
-            <a asp-action="Checkout" class="btn btn-primary btn-lg mt-3">
+            <a asp-area="Customer" asp-controller="Orders" asp-action="Checkout" class="btn btn-primary btn-lg mt-3">
                 <i class="fas fa-credit-card"></i> Proceed to Checkout
             </a>
         </div>
