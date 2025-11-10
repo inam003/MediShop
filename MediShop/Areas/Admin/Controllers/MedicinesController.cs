@@ -29,7 +29,7 @@ namespace MediShop.Areas.Admin.Controllers
 
             if (id == null || id == 0)
             {
-                ViewBag.Suppliers = new SelectList(_context.Suppliers, "SupplierId", "Name");
+                ViewBag.Suppliers = new SelectList(_context.Suppliers.ToList(), "SupplierId", "Name");
                 //return View(medicine);
             }
             else
@@ -41,7 +41,7 @@ namespace MediShop.Areas.Admin.Controllers
                     return NotFound();
                 }
 
-                ViewBag.Suppliers = new SelectList(_context.Suppliers, "SupplierId", "Name", medicine.SupplierId);
+                ViewBag.Suppliers = new SelectList(_context.Suppliers.ToList(), "SupplierId", "Name", medicine.SupplierId);
                 return View(medicine);
             }
 

@@ -67,7 +67,7 @@ namespace MediShop.Areas.Customer.Controllers
                 UserId = userId,
                 OrderDate = DateTime.Now,
                 Status = "Pending",
-                TotalAmount = cartItems.Sum(item => item.Medicine.Price * item.Quantity),
+                TotalAmount = cartItems.Sum(item => item.Medicine?.Price * item.Quantity),
             };
             _context.Orders.Add(order);
             _context.SaveChanges();
@@ -79,7 +79,7 @@ namespace MediShop.Areas.Customer.Controllers
                     OrderId = order.OrderId,
                     MedicineId = item.MedicineId,
                     Quantity = item.Quantity,
-                    Price = item.Medicine.Price
+                    Price = item.Medicine?.Price
                 };
                 _context.OrderDetails.Add(orderDetail);
             }

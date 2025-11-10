@@ -25,9 +25,8 @@
                 {
                     <tr>
                         <td><strong>#@order.OrderId</strong></td>
-                        @* <td>Customer @order.CustomerId</td> *@
-                        <td>@order.OrderDate.ToString("MMM dd, yyyy")</td>
-                        <td>₨ @order.TotalAmount.ToString("N2")</td>
+                        <td>Customer @order.User</td>                        <td>@order.OrderDate.ToString("MMM dd, yyyy")</td>
+                        <td>₨ @order.TotalAmount?.ToString("N2")</td>
                         <td>
                             <span class="badge @(order.Status == "Pending" ? "bg-warning" : order.Status == "Completed" ? "bg-info" : "bg-success")">
                                 @order.Status

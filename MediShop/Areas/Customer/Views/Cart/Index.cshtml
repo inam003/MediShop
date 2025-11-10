@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<MediShop.Model.Cart>
 
 <div class="container">
-    <h2 class="mb-4 text-primary"><i class="fas fa-shopping-cart"></i> Your Cart</h2>
 
     @if (!Model.Any())
     {
@@ -16,6 +15,7 @@
     }
     else
     {
+        <h2 class="mb-4 text-primary"><i class="fas fa-shopping-cart"></i> Your Cart</h2>
         <table class="table table-bordered align-middle">
             <thead class="table-light">
                 <tr>

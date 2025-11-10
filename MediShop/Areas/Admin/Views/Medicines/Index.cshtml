@@ -34,7 +34,7 @@
                         <td><strong>@medicine.Name</strong></td>
                         <td><span class="badge bg-info">@medicine.Category</span></td>
                         <td>@medicine.Supplier?.Name</td>
-                        <td>₨ @medicine.Price.ToString("N2")</td>
+                        <td>₨ @medicine.Price?.ToString("N2")</td>
                         <td>
                             <span class="badge @(medicine.StockQuantity < 10 ? "bg-danger" : "bg-success")">
                                 @medicine.StockQuantity units

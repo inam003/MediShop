@@ -27,23 +27,21 @@
     </div>
 </div>
 
-<div class="mb-5">
-    <form method="get" asp-area="Customer" asp-controller="Home" asp-action="Index">
-        <div class="input-group input-group-lg shadow-sm">
-            <input type="text" name="search" class="form-control" placeholder="Search medicines by name or category..." />
-            <button type="submit" class="btn btn-primary">Search</button>
-        </div>
-    </form>
-</div>
-
-<h2 class="fw-semibold mb-4 text-primary">Available Medicines</h2>
-
 <div class="row g-4">
 
     @if (Model != null && Model.Any())
     {
         @foreach (var medicine in Model)
         {
+            <div class="mb-5">
+                <form method="get" asp-area="Customer" asp-controller="Home" asp-action="Index">
+                    <div class="input-group input-group-lg shadow-sm">
+                        <input type="text" name="search" class="form-control" placeholder="Search medicines by name or category..." />
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+                </form>
+            </div>
+            <h2 class="fw-semibold mb-4 text-primary">Available Medicines</h2>
             <div class="col-md-3 col-sm-6">
                 <div class="card h-100 shadow-sm border-0 product-card">
                     <img src="~/images/Vitamin C Tablets.jpg" class="card-img-top" alt="@medicine.Name" style="height: 180px; object-fit: cover;">
@@ -75,11 +73,16 @@
     }
     else
     {
-        <div class="col-12">
-            <div class="alert alert-info text-center">
-                <i class="fas fa-info-circle"></i> No medicines found. Try adjusting your search.
+        <div class="col-12 text-center mt-5">
+            <div class="card shadow-sm border-0 p-4">
+                <div class="card-body">
+                    <i class="fas fa-pills fa-3x text-primary mb-3"></i>
+                    <h5 class="text-muted fw-semibold">No Medicines Found</h5>
+                    <p class="text-secondary mb-0">Try adjusting your search or filters to find what you’re looking for.</p>
+                </div>
             </div>
         </div>
+
     }
 
 </div>

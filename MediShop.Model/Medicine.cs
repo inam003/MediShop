@@ -12,18 +12,24 @@ public class Medicine
     public string? Name { get; set; }
     [Required]
     public string? Category { get; set; }
+    [Required]
     public string? Description { get; set; }
     [Required]
-    public double Price { get; set; }
-    public int StockQuantity { get; set; }
+    [Range(1, double.MaxValue, ErrorMessage = "Please enter a valid price")]
+    public double? Price { get; set; }
+    [Required]
+    [Range(0, int.MaxValue, ErrorMessage = "Please enter a valid stock quantity")]
+    public int? StockQuantity { get; set; }
     [DisplayName("Image URL")]
     [ValidateNever]
     public string? ImageUrl { get; set; }
 
     [DisplayName("Supplier")]
+    [Required(ErrorMessage = "Please select a supplier")]
     public int SupplierId { get; set; }
     [ForeignKey("SupplierId")]
     [ValidateNever]
     public Supplier? Supplier { get; set; }
-    public ICollection<OrderDetail> OrderDetails { get; set; }
+    [ValidateNever]
+    public ICollection<OrderDetail>? OrderDetails { get; set; }
 }
