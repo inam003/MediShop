@@ -31,8 +31,6 @@
 
     @if (Model != null && Model.Any())
     {
-        @foreach (var medicine in Model)
-        {
             <div class="mb-5">
                 <form method="get" asp-area="Customer" asp-controller="Home" asp-action="Index">
                     <div class="input-group input-group-lg shadow-sm">
@@ -41,31 +39,59 @@
                     </div>
                 </form>
             </div>
-            <h2 class="fw-semibold mb-4 text-primary">Available Medicines</h2>
+        @if (!string.IsNullOrEmpty(Context.Request.Query["search"]))
+        {
+            <h2 class="fw-semibold mb-4 text-primary">Search results for @Context.Request.Query["search"]</h2>
+        }
+        else
+        {
+            <h2 class="fw-semibold mb-4 text-primary">Available Medicines</h2>    
+        }
+        @foreach (var medicine in Model)
+        {
             <div class="col-md-3 col-sm-6">
                 <div class="card h-100 shadow-sm border-0 product-card">
                     <img src="~/images/Vitamin C Tablets.jpg" class="card-img-top" alt="@medicine.Name" style="height: 180px; object-fit: cover;">
                     <div class="card-body text-center">
                         <h5 class="card-title">@medicine.Name</h5>
                         <p class="text-muted mb-2">Rs. @medicine.Price</p>
-                        @if (SignInManager.IsSignedIn(User) && User.IsInRole(SD.Role_Customer))
+
+                        @if (SignInManager.IsSignedIn(User))
                         {
-                            <form asp-area="Customer" asp-controller="Cart" asp-action="AddToCart" method="post" enctype="multipart/form-data">
-                                @Html.AntiForgeryToken()
-                                <input type="hidden" name="medicineId" value="@medicine.MedicineId" />
-                                <input type="number" name="quantity" value="1" min="1" class="form-control mb-2" />
-                                <button type="submit" class="btn btn-primary w-100">
-                                    <i class="fas fa-cart-plus"></i> Add to Cart
-                                </button>
-                            </form>
+                            if (User.IsInRole(SD.Role_Customer))
+                            {
+                                <form asp-area="Customer" asp-controller="Cart" asp-action="AddToCart" method="post" enctype="multipart/form-data">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="medicineId" value="@medicine.MedicineId" />
+                                    <input type="number" name="quantity" value="1" min="1" class="form-control mb-2" />
+                                    <button type="submit" class="btn btn-primary w-100">
+                                        <i class="fas fa-cart-plus"></i> Add to Cart
+                                    </button>
+                                </form>
+                            }
+                            else if(User.IsInRole(SD.Role_Admin))
+                            {
+                                <a asp-area="Customer" asp-controller="Home" asp-action="MedicineDetails" asp-route-id="@medicine.MedicineId"
+                                   class="btn btn-secondary w-100">
+                                    <i class="fas fa-info-circle"></i> View Details
+                                </a>
+                            }
                         }
                         else
                         {
                             <a asp-area="Identity" asp-controller="Account" asp-action="Login"
-                               class="btn btn-outline-primary">Login to Add</a>
+                               class="btn btn-primary w-100">
+                                <i class="fas fa-sign-in-alt"></i> Login to Add
+                            </a>
                         }
-                        <a asp-area="Customer" asp-controller="Home" asp-action="MedicineDetails" asp-route-id="@medicine.MedicineId"
-                           class="btn btn-outline-primary">View Details</a>
+
+                        @if (!User.IsInRole(SD.Role_Admin))
+                        {
+                            <a asp-area="Customer" asp-controller="Home" asp-action="MedicineDetails" asp-route-id="@medicine.MedicineId"
+                               class="btn btn-secondary w-100 mt-2">
+                                <i class="fas fa-info-circle"></i> View Details
+                            </a>
+                        }
                     </div>
                 </div>
             </div>
@@ -82,9 +108,7 @@
                 </div>
             </div>
         </div>
-
     }
-
 </div>
 
 

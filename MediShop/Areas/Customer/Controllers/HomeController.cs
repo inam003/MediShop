@@ -18,10 +18,17 @@ namespace MediShop.Areas.Customer.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string? search)
         {
-            var medicines = _context.Medicines.ToList();
-            return View(medicines);
+            var medicines = _context.Medicines.Include(m => m.Supplier).AsQueryable();
+
+            var lowerSearch = search?.ToLower();
+            if (search != null)
+            {
+                medicines = medicines.Where(m => m.Name.Contains(lowerSearch) || m.Description.Contains(lowerSearch));
+            }
+
+            return View(medicines.ToList());
         }
 
         public IActionResult MedicineDetails(int id)
