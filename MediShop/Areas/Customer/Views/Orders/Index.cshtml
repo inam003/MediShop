@@ -20,8 +20,6 @@ else
     <div class="container">
         <h2 class="mb-4 text-primary"><i class="fas fa-shopping-bag"></i> My Orders</h2>
 
-        @foreach (var item in Model)
-        {
             <div class="card shadow-sm border-0">
                 <div class="card-body">
                     <div class="table-responsive">
@@ -32,10 +30,12 @@ else
                                     <th scope="col">Order Date</th>
                                     <th scope="col">Total Amount</th>
                                     <th scope="col">Status</th>
-                                    <th scope="col" class="text-center">Action</th>
+                                    @* <th scope="col" class="text-center">Action</th> *@
                                 </tr>
                             </thead>
                             <tbody>
+                            @foreach (var item in Model)
+                            {
                                 <tr>
                                     <td>@item.OrderId</td>
                                     <td>@item.OrderDate</td>
@@ -43,19 +43,18 @@ else
                                     <td>
                                         <span class="badge bg-warning text-dark">@item.Status</span>
                                     </td>
-                                    <td class="text-center">
+                                    @* <td class="text-center">
                                         <a asp-area="Customer" asp-controller="Orders" asp-action="Details" class="btn btn-sm btn-outline-primary">
                                             <i class="bi bi-eye"></i> View
                                         </a>
-                                    </td>
+                                    </td> *@
                                 </tr>
-
+                            }
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-        }
     </div>
 }
 

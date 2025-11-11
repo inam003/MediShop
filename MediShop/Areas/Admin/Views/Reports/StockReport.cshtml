@@ -3,7 +3,6 @@
 @{
     ViewData["Title"] = "Stock Report";
     Layout = "_Layout";
-    var medicine = 10;
 }
 
 <h2 class="mb-4"><i class="fas fa-boxes"></i> Stock Report</h2>
@@ -26,19 +25,19 @@
                 </tr>
             </thead>
             <tbody>
-                @* @foreach (var medicine in Model)
+                @foreach (var medicine in Model)
                 { 
-                    <tr class="@(medicine.QuantityInStock < 10 ? "table-danger" : "")">
+                    <tr class="@(medicine.StockQuantity < 10 ? "table-danger" : "")">
                         <td><strong>@medicine.Name</strong></td>
                         <td><span class="badge bg-info">@medicine.Category</span></td>
-                        <td>₨ @medicine.Price.ToString("N2")</td>
-                        <td class="fw-bold">@medicine.QuantityInStock units</td>
+                        <td>₨ @medicine.Price?.ToString("N2")</td>
+                        <td class="fw-bold">@medicine.StockQuantity units</td>
                         <td>
-                            @if (medicine.QuantityInStock == 0)
+                            @if (medicine.StockQuantity == 0)
                             {
                                 <span class="badge bg-danger">Out of Stock</span>
                             }
-                            else if (medicine.QuantityInStock < 10)
+                            else if (medicine.StockQuantity < 10)
                             {
                                 <span class="badge bg-warning">Low Stock</span>
                             }
@@ -48,28 +47,7 @@
                             }
                         </td>
                     </tr>
-                } *@
-
-                <tr class="table-danger">
-                    <td><strong>Panadol</strong></td>
-                    <td><span class="badge bg-info">Cough</span></td>
-                    <td>₨ 100</td>
-                    <td class="fw-bold">9 units</td>
-                    <td>
-                        @if (medicine == 0)
-                        {
-                            <span class="badge bg-danger">Out of Stock</span>
-                        }
-                        else if (medicine < 10)
-                        {
-                            <span class="badge bg-warning">Low Stock</span>
-                        }
-                        else
-                        {
-                            <span class="badge bg-success">In Stock</span>
-                        }
-                    </td>
-                </tr>
+                }
             </tbody>
         </table>
     </div>

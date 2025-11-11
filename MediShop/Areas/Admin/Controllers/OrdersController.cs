@@ -19,5 +19,28 @@ namespace MediShop.Areas.Admin.Controllers
             var medicines = _context.Orders.ToList();
             return View(medicines);
         }
+
+        [HttpPost]
+        public IActionResult MarkCompleteStatus(int orderId) {
+            var order = _context.Orders.Find(orderId);
+            if (order != null)
+            {
+                order.Status = "Completed";
+                _context.SaveChanges();
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public IActionResult MarkDeliveredStatus(int orderId)
+        {
+            var order = _context.Orders.Find(orderId);
+            if (order != null)
+            {
+                order.Status = "Delivered";
+                _context.SaveChanges();
+            }
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

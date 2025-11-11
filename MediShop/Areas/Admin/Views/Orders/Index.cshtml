@@ -35,15 +35,20 @@
                         <td>
                             @if (order.Status == "Pending")
                             {
-                                <form method="post" asp-action="UpdateOrderStatus" asp-route-id="@order.OrderId" asp-route-status="Completed" class="d-inline">
-                                    <button type="submit" class="btn btn-sm btn-info">Mark Completed</button>
+                                <form method="post" asp-action="MarkCompleteStatus" asp-route-orderId="@order.OrderId" name="orderId" asp-route-status="Completed" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-warning">Mark Completed</button>
                                 </form>
                             }
-                            @if (order.Status == "Completed")
+                            else if (order.Status == "Completed")
                             {
-                                <form method="post" asp-action="UpdateOrderStatus" asp-route-id="@order.OrderId" asp-route-status="Delivered" class="d-inline">
-                                    <button type="submit" class="btn btn-sm btn-success">Mark Delivered</button>
+                                <form method="post" asp-action="MarkDeliveredStatus" asp-route-orderId="@order.OrderId" name="orderId" asp-route-status="Delivered" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-info">Mark Delivered</button>
                                 </form>
+                            }
+
+                            else if (order.Status == "Delivered")
+                            {
+                                <span class="badge bg-success">Delivered</span>
                             }
                         </td>
                     </tr>

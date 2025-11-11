@@ -55,5 +55,44 @@ namespace MediShop.Areas.Customer.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index", "Cart", new { area = "Customer" });
         }
+
+        [HttpPost]
+        public IActionResult IncreaseQuantity(int cartId) 
+        {
+            var cartItem = _context.CartItems.Find(cartId);
+            if (cartItem != null)
+            {
+                cartItem.Quantity++;
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public IActionResult DecreaseQuantity(int cartId)
+        {
+            var cartItem = _context.CartItems.Find(cartId);
+            if (cartItem != null && cartItem.Quantity > 1)
+            {
+                cartItem.Quantity--;
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public IActionResult Remove(int cartId)
+        {
+            var cartItem = _context.CartItems.Find(cartId);
+            if (cartItem != null)
+            {
+                _context.CartItems.Remove(cartItem);
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
