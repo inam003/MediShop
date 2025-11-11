@@ -38,6 +38,7 @@ namespace MediShop.Areas.Admin.Controllers
 
                 if (medicine == null)
                 {
+                    TempData["Error"] = "Medicine not found.";
                     return NotFound();
                 }
 
@@ -56,10 +57,12 @@ namespace MediShop.Areas.Admin.Controllers
             {
                 if (medicine.MedicineId == 0)
                 {
+                    TempData["Success"] = "Medicine created successfully!";
                     _context.Medicines.Add(medicine);
                 }
                 else
                 {
+                    TempData["Success"] = "Medicine updated successfully!";
                     _context.Medicines.Update(medicine);
                 }
 
@@ -75,6 +78,7 @@ namespace MediShop.Areas.Admin.Controllers
         {
             if (id == null || id == 0)
             {
+                TempData["Error"] = "Invalid medicine ID.";
                 return NotFound();
             }
 
@@ -82,6 +86,7 @@ namespace MediShop.Areas.Admin.Controllers
 
             if (medicine == null)
             {
+                TempData["Error"] = "Medicine not found.";
                 return NotFound();
             }
 
@@ -96,10 +101,13 @@ namespace MediShop.Areas.Admin.Controllers
             Medicine? medicine = _context.Medicines.FirstOrDefault(m => m.MedicineId == id);
             if (medicine == null)
             {
+                TempData["Error"] = "Medicine not found.";
                 return NotFound();
             }
+
             _context.Medicines.Remove(medicine);
             _context.SaveChanges();
+            TempData["Success"] = "Medicine deleted successfully!";
             return RedirectToAction(nameof(Index));
         }
     }

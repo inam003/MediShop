@@ -1,6 +1,7 @@
 ﻿using MediShop.DataAccess.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace MediShop.Areas.Admin.Controllers
 {
@@ -16,18 +17,45 @@ namespace MediShop.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            var medicines = _context.Orders.ToList();
+            var medicines = _context.Orders
+                .Include(o => o.User)
+                .Include(od => od.OrderDetails)
+                .ToList();
             return View(medicines);
         }
 
         [HttpPost]
         public IActionResult MarkCompleteStatus(int orderId) {
             var order = _context.Orders.Find(orderId);
-            if (order != null)
+            if (order == null)
+            {
+                TempData["Error"] = "Order not found.";
+                return NotFound();
+            }
+            else
             {
                 order.Status = "Completed";
-                _context.SaveChanges();
             }
+
+            var orderDetails = _context.OrderDetails.Where(od => od.OrderId == orderId).ToList();
+
+            foreach (var detail in orderDetails)
+            {
+                var medicine = _context.Medicines.Find(detail.MedicineId);
+                if (medicine != null)
+                {
+                    if(medicine.StockQuantity >= detail.Quantity){
+                        medicine.StockQuantity -= detail.Quantity;
+                    }
+                    else
+                    {
+                        TempData["Error"] = $"Insufficient stock for medicine ID {medicine.MedicineId}.";
+                    }
+                }
+            }
+
+            _context.SaveChanges();
+            TempData["Success"] = "Order Completed successfully!";
             return RedirectToAction(nameof(Index));
         }
 
@@ -38,8 +66,10 @@ namespace MediShop.Areas.Admin.Controllers
             if (order != null)
             {
                 order.Status = "Delivered";
-                _context.SaveChanges();
             }
+
+            _context.SaveChanges();
+            TempData["Success"] = "Order Delivered successfully!";
             return RedirectToAction(nameof(Index));
         }
     }

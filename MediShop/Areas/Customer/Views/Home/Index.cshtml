@@ -28,17 +28,18 @@
 </div>
 
 <div class="row g-4">
+    <div>
+        <form method="get" asp-area="Customer" asp-controller="Home" asp-action="Index">
+            <div class="input-group input-group-lg shadow-sm">
+                <input type="text" name="search" class="form-control" placeholder="Search medicines by name or category..." />
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
+    </div>
+
 
     @if (Model != null && Model.Any())
     {
-            <div class="mb-5">
-                <form method="get" asp-area="Customer" asp-controller="Home" asp-action="Index">
-                    <div class="input-group input-group-lg shadow-sm">
-                        <input type="text" name="search" class="form-control" placeholder="Search medicines by name or category..." />
-                        <button type="submit" class="btn btn-primary">Search</button>
-                    </div>
-                </form>
-            </div>
         @if (!string.IsNullOrEmpty(Context.Request.Query["search"]))
         {
             <h2 class="fw-semibold mb-4 text-primary">Search results for @Context.Request.Query["search"]</h2>

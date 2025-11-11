@@ -52,6 +52,7 @@ namespace MediShop.Areas.Customer.Controllers
         public IActionResult PlaceOrder()
         {
             var userId = _userManager.GetUserId(User);
+
             var cartItems = _context.CartItems
                 .Include(m => m.Medicine)
                 .Where(c => c.UserId == userId)
@@ -72,22 +73,31 @@ namespace MediShop.Areas.Customer.Controllers
             _context.Orders.Add(order);
             _context.SaveChanges();
 
-            foreach (var item in cartItems)
+            //foreach (var item in cartItems)
+            //{
+            //    var orderDetail = new OrderDetail
+            //    {
+            //        OrderId = order.OrderId,
+            //        MedicineId = item.MedicineId,
+            //        Quantity = item.Quantity,
+            //        Price = item.Medicine?.Price
+            //    };
+            //    _context.OrderDetails.Add(orderDetail);
+            //}
+
+            var orderDetails = cartItems.Select(item => new OrderDetail
             {
-                var orderDetail = new OrderDetail
-                {
-                    OrderId = order.OrderId,
-                    MedicineId = item.MedicineId,
-                    Quantity = item.Quantity,
-                    Price = item.Medicine?.Price
-                };
-                _context.OrderDetails.Add(orderDetail);
-            }
-            _context.SaveChanges();
+                OrderId = order.OrderId,
+                MedicineId = item.MedicineId,
+                Quantity = item.Quantity,
+                Price = item.Medicine?.Price
+            }).ToList();
 
+            _context.OrderDetails.AddRange(orderDetails);
             _context.CartItems.RemoveRange(cartItems);
-            _context.SaveChanges();
 
+            _context.SaveChanges();
+            TempData["Success"] = "Order placed successfully!";
             return RedirectToAction("OrderConfirmation", new { id = order.OrderId });
         }
 

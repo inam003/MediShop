@@ -15,6 +15,7 @@
                     <th>Order ID</th>
                     <th>Customer</th>
                     <th>Date</th>
+                    <th>Quantity</th>
                     <th>Total</th>
                     <th>Status</th>
                     <th>Actions</th>
@@ -25,7 +26,9 @@
                 {
                     <tr>
                         <td><strong>#@order.OrderId</strong></td>
-                        <td>Customer @order.User</td>                        <td>@order.OrderDate.ToString("MMM dd, yyyy")</td>
+                        <td>Customer @order.User?.Name</td>
+                        <td>@order.OrderDate.ToString("MMM dd, yyyy")</td>
+                        <td>@order.OrderDetails.Sum(od => od.Quantity ?? 0)</td>
                         <td>₨ @order.TotalAmount?.ToString("N2")</td>
                         <td>
                             <span class="badge @(order.Status == "Pending" ? "bg-warning" : order.Status == "Completed" ? "bg-info" : "bg-success")">

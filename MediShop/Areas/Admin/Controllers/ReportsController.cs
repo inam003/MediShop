@@ -15,7 +15,11 @@ namespace MediShop.Areas.Admin.Controllers
         }
         public IActionResult SalesReport()
         {
-            return View();
+            ViewBag.TotalSales = _context.Orders.Where(o => o.Status == "Delivered").Sum(o => o.TotalAmount);
+            ViewBag.TotalOrders = _context.Orders.Where(o => o.Status == "Delivered").Count();
+
+            var orderDetails = _context.Orders.Where(o => o.Status == "Delivered").ToList();
+            return View(orderDetails);
         }
 
         public IActionResult StockReport()

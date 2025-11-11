@@ -28,6 +28,7 @@ else
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Order Date</th>
+                                <th scope="col">Quantity</th>
                                     <th scope="col">Total Amount</th>
                                     <th scope="col">Status</th>
                                     @* <th scope="col" class="text-center">Action</th> *@
@@ -39,9 +40,21 @@ else
                                 <tr>
                                     <td>@item.OrderId</td>
                                     <td>@item.OrderDate</td>
+                                    <td>@item.OrderDetails.Sum(od => od.Quantity)</td>
                                     <td>@item.TotalAmount</td>
                                     <td>
-                                        <span class="badge bg-warning text-dark">@item.Status</span>
+                                        @if(item.Status == "Pending")
+                                        {
+                                            <span class="badge bg-warning text-dark">Pending</span>
+                                        }
+                                        else if(item.Status == "Completed")
+                                        {
+                                            <span class="badge bg-info text-dark">Completed</span>
+                                        }
+                                        else if(item.Status == "Delivered")
+                                        {
+                                            <span class="badge bg-success">Delivered</span>
+                                        }
                                     </td>
                                     @* <td class="text-center">
                                         <a asp-area="Customer" asp-controller="Orders" asp-action="Details" class="btn btn-sm btn-outline-primary">

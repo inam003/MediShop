@@ -53,6 +53,7 @@ namespace MediShop.Areas.Customer.Controllers
             }
 
             _context.SaveChanges();
+            TempData["Success"] = "Medicine added to cart successfully!";
             return RedirectToAction("Index", "Cart", new { area = "Customer" });
         }
 
@@ -63,9 +64,9 @@ namespace MediShop.Areas.Customer.Controllers
             if (cartItem != null)
             {
                 cartItem.Quantity++;
-                _context.SaveChanges();
             }
 
+            _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 
@@ -76,9 +77,9 @@ namespace MediShop.Areas.Customer.Controllers
             if (cartItem != null && cartItem.Quantity > 1)
             {
                 cartItem.Quantity--;
-                _context.SaveChanges();
             }
 
+            _context.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
 
@@ -89,9 +90,10 @@ namespace MediShop.Areas.Customer.Controllers
             if (cartItem != null)
             {
                 _context.CartItems.Remove(cartItem);
-                _context.SaveChanges();
             }
 
+            _context.SaveChanges();
+            TempData["Success"] = "Item removed from cart successfully!";
             return RedirectToAction(nameof(Index));
         }
     }
