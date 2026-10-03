@@ -66,4 +66,5 @@ Layered solution with four projects:
 
 ## Screenshots
 
-_Add 2 to 3 screenshots here (storefront, cart, admin dashboard)._
+<img width="1897" height="917" alt="image" src="https://github.com/user-attachments/assets/3ec908e9-1a1c-4a11-8160-8c5388eec0b4" />
+
