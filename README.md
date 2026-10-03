@@ -67,4 +67,11 @@ Layered solution with four projects:
 ## Screenshots
 
 <img width="1897" height="917" alt="image" src="https://github.com/user-attachments/assets/3ec908e9-1a1c-4a11-8160-8c5388eec0b4" />
+<img width="1917" height="916" alt="image" src="https://github.com/user-attachments/assets/ad735286-3092-4c4d-9c06-a3c5890da5d7" />
+<img width="1917" height="916" alt="image" src="https://github.com/user-attachments/assets/6b78662f-dd57-444b-b8d6-f1bbe2b0f9fc" />
+<img width="1917" height="921" alt="image" src="https://github.com/user-attachments/assets/60acbe18-7d9e-4d37-8c29-5f589d3f3af3" />
+<img width="1917" height="912" alt="image" src="https://github.com/user-attachments/assets/ae2ca8e2-f62e-48bf-8309-606054214d28" />
+
+
+
 
